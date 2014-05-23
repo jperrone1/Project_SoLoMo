@@ -1,0 +1,6 @@
+<h1>SoLoMo Posts</h1>
+<p>Posts:</p>
+
+<% @posts.each do |post| %>
+  <li><%= link_to post.title, post_comments_path(post)%></li>
+<% end %>

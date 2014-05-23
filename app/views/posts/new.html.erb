@@ -1,0 +1,14 @@
+<h1>New Post</h1>
+
+<%= form_for @post do |f| %>
+  <%= f.text_field :title, placeholder: "Post title" %>
+  <%= f.text_field :body, placeholder: "Meat of post" %>
+  <%= f.fields_for :comments, @post.comments.build do |b| %>
+  	<%= b.text_field :title, placeholder: "Comment title" %>
+  <% end %>
+  <%= f.submit %>
+
+<% end %>
+
+
+
