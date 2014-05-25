@@ -1,4 +1,4 @@
-<h1>New Post</h1>
+<h1>Editing post</h1>
 
 <%= form_for @post do |f| %>
   <%= f.text_field :title, placeholder: "Post title" %>
@@ -10,4 +10,5 @@
 
 <% end %>
 
-
+<%= link_to 'Show', @post %> |
+<%= link_to 'Index', posts_path %>

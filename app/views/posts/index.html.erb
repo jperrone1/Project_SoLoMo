@@ -2,5 +2,14 @@
 <p>Posts:</p>
 
 <% @posts.each do |post| %>
-  <li><%= link_to post.title, post_comments_path(post)%></li>
+	<tr>
+  	<td><strong><%= post.title %></strong></td>
+  	<td><%= link_to 'Show', post %></td>
+  	<td><%= link_to 'Edit', edit_post_path(post) %></td>
+    <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
+    <br>
+  </tr>
 <% end %>
+
+<br>
+<%= link_to 'New Post', new_post_path %>

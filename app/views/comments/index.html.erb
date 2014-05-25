@@ -1,14 +1,2 @@
-<h1><%= @post.title %></h1>
-<p><%=@post.body%></p>
-
-<b>Comments:</b>
-<% @comments.each do |comment|%>
-  <li><%=comment.title%>
-    <%= link_to "Show", post_comment_path(@post, comment) %>
-    <%= link_to "Delete", [@post, comment], method: :delete, data: {confirm: "Are You Sure?"} %>
-
-  </li>
-<% end %>
-<br>
-<%= link_to "Comment On This Item", new_post_comment_path(@post), :class=>"btn btn-info" %>
-</p>
+<h1>Comments#index</h1>
+<p>Find me in app/views/comments/index.html.erb</p>
