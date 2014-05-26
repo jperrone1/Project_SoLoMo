@@ -3,11 +3,11 @@ class PostsController < ApplicationController
 	def index
     @posts = Post.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @posts }
-      format.xml  { render :xml => @posts }
-    end
+    # respond_to do |format|
+    #   format.html # index.html.erb
+    #   format.json { render :json => @posts }
+    #   format.xml  { render :xml => @posts }
+    # end
   end
 
   def show
@@ -21,6 +21,7 @@ class PostsController < ApplicationController
   end
 
   def new
+    @posts = Post.all
     @post = Post.new
 
     respond_to do |format|
@@ -35,12 +36,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(post_params)
+    @post = Post.new(post_params)
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to(@post, :notice => 'post was successfully created.') }
-        format.json { render :json => @post, :status => :created, :location => @post }
-        format.xml  { render :xml => @post, :status => :created, :location => @post }
+        format.json { render :json => @post, :status => :created } #:location => @post }
+        format.xml  { render :xml => @post, :status => :created }  #:location => @post }
       else
         format.html { render :action => "new" }
         format.json { render :json => @post.errors, :status => :unprocessable_entity }

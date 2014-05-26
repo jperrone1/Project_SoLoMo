@@ -1,3 +1,12 @@
+
+
+<header>
+  <div class="container">
+    <h1>SoLoMo App</h1>
+  </div>
+</header>
+
+
 <h1>SoLoMo Posts</h1>
 <p>Posts:</p>
 
@@ -12,4 +21,38 @@
 <% end %>
 
 <br>
-<%= link_to 'New Post', new_post_path %>
+
+
+<div class="container">
+  <div class="row">
+     <div class="col-sm-6">
+      <form class="form-horizontal" id="new_post">
+        <div class="form-group">
+          <label for="post_title" class="col-sm-2 control-label">Post Title</label>
+          <div class="col-sm-10">
+            <input type="text" id="post_title" class="form-control" placeholder="Enter post">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="post_body" class="col-sm-2 control-label">Body</label>
+          <div class="col-sm-10">
+            <input type="text" id="post_body" class="form-control" placeholder="post body here">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-whole">ADD POST</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="posts" class="col-sm-offset-1 col-sm-5">
+
+    </div>
+  </div>
+</div>
+<ul>
+
+
+
