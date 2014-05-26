@@ -19,9 +19,9 @@ $(document).ready(function(){
       dataType: "json",
       success: function(data) {
         console.log(data);
-        var ul = $('ul')
+        var span = $('span')
         var post =  "<li><b>"+data.title+"</b> - " +data.body + "</li>";
-        ul.append(post);
+        span.append(post);
         $(':text').val('');
       },
       error: function(){

@@ -3,11 +3,7 @@
 <%= form_for @post do |f| %>
   <%= f.text_field :title, placeholder: "Post title" %>
   <%= f.text_field :body, placeholder: "Message to post" %>
-  <%= f.fields_for :comments, @post.comments.build do |b| %>
-  	<%= b.text_field :title, placeholder: "Comment title" %>
-  <% end %>
   <%= f.submit %>
-
 <% end %>
 
 <%= link_to 'Show', @post %> |

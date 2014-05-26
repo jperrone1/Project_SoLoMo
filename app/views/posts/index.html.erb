@@ -1,24 +1,16 @@
-
-
-<header>
-  <div class="container">
-    <h1>SoLoMo App</h1>
-  </div>
-</header>
-
-
 <h1>SoLoMo Posts</h1>
-<p>Posts:</p>
 
 <% @posts.each do |post| %>
 	<tr>
-  	<td><strong><%= post.title %></strong></td>
+  	<td><strong><%= post.title %>: </strong><%= post.body %></td>
   	<td><%= link_to 'Show', post %></td>
   	<td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
     <br>
   </tr>
 <% end %>
+
+<td><strong><span class="post_1"></strong></span></td>
 
 <br>
 
@@ -39,7 +31,7 @@
             <input type="text" id="post_body" class="form-control" placeholder="post body here">
           </div>
         </div>
-        
+
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <button class="btn btn-whole">ADD POST</button>
@@ -52,7 +44,8 @@
     </div>
   </div>
 </div>
-<ul>
+
+
 
 
 

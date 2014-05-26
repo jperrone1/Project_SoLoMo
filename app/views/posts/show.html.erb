@@ -1,23 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
-  <%= @post.title %>
+  <b>Post</b>
+  <br>
+  <b><%= @post.title %>: 
+  <br>
+  </b><%= @post.body %>
 </p>
 
 
 <p>
-	<b>Comments:</b>
 	<ul>
 		<%= render :partial => 'comments/comment', :collection => @post.comments %>
 	</ul>
 </p>
 
 <p>
-	<b>New Comment:</b>
 	<%= form_for [@post, Comment.new] do |f| %>
 	  <p>
-	    <%= f.label :title %><br />
+	    <%= f.label "New comment" %><br />
 	    <%= f.text_area :title %>
 	  </p>
 	  <p><%= f.submit "Submit" %></p>
