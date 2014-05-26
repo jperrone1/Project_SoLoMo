@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :picture do
-    image "MyString"
     user_id 1
   end
 end
