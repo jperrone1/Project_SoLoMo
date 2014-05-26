@@ -25,11 +25,19 @@ gem 'devise'
 
 gem 'json'
 
-gem 'pry'
+# Commented out pry gem here, since it belongs in development 
+# and test groups only, and it's already there. (JP) 
+# gem 'pry'
 
 gem 'typhoeus'
 
 gem 'geocoder'
+
+# Paperclip gem for uploading images (JP):
+gem 'paperclip'
+
+# Amazon web services gem required by Paperclip (JP):
+gem 'aws-sdk'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
