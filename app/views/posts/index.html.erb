@@ -1,16 +1,9 @@
 <h1>SoLoMo Posts</h1>
 
-<% @posts.each do |post| %>
-	<tr>
-  	<td><strong><%= post.title %>: </strong><%= post.body %></td>
-  	<td><%= link_to 'Show', post %></td>
-  	<td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
-    <br>
-  </tr>
-<% end %>
 
-<td><strong><span class="post_1"></strong></span></td>
+<!-- adds post via jquery, moves up to <td> with refresh -->
+<td><strong><span class="post_1"></strong></span></td> 
+<!-- <ul id = "post_show"> </ul> -->
 
 <br>
 
@@ -18,7 +11,7 @@
 <div class="container">
   <div class="row">
      <div class="col-sm-6">
-      <form class="form-horizontal" id="new_post">
+      <form class="form-horizontal" id="new_post">  <!-- $('#new_post').on('submit....... -->
         <div class="form-group">
           <label for="post_title" class="col-sm-2 control-label">Post Title</label>
           <div class="col-sm-10">
@@ -38,9 +31,6 @@
           </div>
         </div>
       </form>
-    </div>
-    <div id="posts" class="col-sm-offset-1 col-sm-5">
-
     </div>
   </div>
 </div>
