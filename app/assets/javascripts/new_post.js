@@ -54,19 +54,20 @@ $(document).ready(function(){
   event.preventDefault();
   var parent = $(this).parent();
   console.log(parent.attr('id'));
-  console.log("Hello DELETE HANDLER!");
 
     $.ajax({
       type: 'get',
-      url: 'posts/delete', 
-      data: 'ajax=' + parent.attr('id') + '&delete=',
-    });        
+      url: 'posts/delete/' + parent.attr('id')
+      // data: 'ajax=' + parent.attr('id') + '&delete=',
+    // success: console.log("DELETED")
+    });     //ajax delete    
     
     parent.fadeOut(500,function(){
     parent.remove();
-    });
 
-  });
+    }); //parent.fadeout
+
+  }); //entire delete handler
 
 
   // var deletePost = function(event){                //defines var set to remove function ($this)
