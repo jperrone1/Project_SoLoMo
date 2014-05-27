@@ -23,15 +23,16 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'devise'
 
-gem 'json'
-
-# Commented out pry gem here, since it belongs in development 
-# and test groups only, and it's already there. (JP) 
-# gem 'pry'
-
-gem 'typhoeus'
 
 gem 'geocoder'
+
+
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0',          group: :doc
+
+
+gem 'json'
+
 
 # Paperclip gem for uploading images (JP):
 gem 'paperclip'
@@ -39,13 +40,12 @@ gem 'paperclip'
 # Amazon web services gem required by Paperclip (JP):
 gem 'aws-sdk'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
+
+
 
 group :development, :test do
   gem 'pry'
+  gem 'pry-rails'
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -55,6 +55,7 @@ end
 
 group :production do
   gem 'rails_12factor'
+
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

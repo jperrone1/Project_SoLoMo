@@ -1,23 +1,29 @@
 Rails.application.routes.draw do
   devise_for :users
 
+
+  resources :pins
+
   resources :comments do
   	resources :comments
   end
-
+  
 	resources :posts do
     resources :comments
   end
+
+
+  root 'pins#new'
 
   resources :events do
   	resources :comments
   end
 
-  root 'posts#index'
+
 
   get '/posts/delete/:id' => 'posts#destroy'
 
-end
+  end
 
 #                   Prefix Verb   URI Pattern                                       Controller#Action
 #         new_user_session GET    /users/sign_in(.:format)                          devise/sessions#new
