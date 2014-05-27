@@ -12,19 +12,16 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-
-  root 'pins#new'
-
   resources :events do
   	resources :comments
   end
 
-
+  root 'posts#index'
 
   get '/posts/delete/:id' => 'posts#destroy'
 
   end
-
+# Macintosh-2:SoLoMo Flanagan$ rake routes
 #                   Prefix Verb   URI Pattern                                       Controller#Action
 #         new_user_session GET    /users/sign_in(.:format)                          devise/sessions#new
 #             user_session POST   /users/sign_in(.:format)                          devise/sessions#create
@@ -41,6 +38,14 @@ Rails.application.routes.draw do
 #                          PATCH  /users(.:format)                                  devise/registrations#update
 #                          PUT    /users(.:format)                                  devise/registrations#update
 #                          DELETE /users(.:format)                                  devise/registrations#destroy
+#                     pins GET    /pins(.:format)                                   pins#index
+#                          POST   /pins(.:format)                                   pins#create
+#                  new_pin GET    /pins/new(.:format)                               pins#new
+#                 edit_pin GET    /pins/:id/edit(.:format)                          pins#edit
+#                      pin GET    /pins/:id(.:format)                               pins#show
+#                          PATCH  /pins/:id(.:format)                               pins#update
+#                          PUT    /pins/:id(.:format)                               pins#update
+#                          DELETE /pins/:id(.:format)                               pins#destroy
 #         comment_comments GET    /comments/:comment_id/comments(.:format)          comments#index
 #                          POST   /comments/:comment_id/comments(.:format)          comments#create
 #      new_comment_comment GET    /comments/:comment_id/comments/new(.:format)      comments#new
@@ -89,7 +94,7 @@ Rails.application.routes.draw do
 #                          PATCH  /events/:id(.:format)                             events#update
 #                          PUT    /events/:id(.:format)                             events#update
 #                          DELETE /events/:id(.:format)                             events#destroy
-#                     root GET    /                                                 posts#index
+#                     root GET    /                                                 comments#index
 #                          GET    /posts/delete/:id(.:format)                       posts#destroy
 
-                         
+

@@ -1,5 +1,5 @@
 class PinsController < ApplicationController
-	before_action :authenticate_user!
+	# before_action :authenticate_user!   add this on eventually root page
 
 	def index
 		@pins = Pin.all
