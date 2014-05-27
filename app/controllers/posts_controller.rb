@@ -37,6 +37,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    # binding.pry
 
     respond_to do |format|
       if @post.save
@@ -66,9 +67,13 @@ class PostsController < ApplicationController
     end
   end
 
-  def destroy
+  def delete
     @post = Post.find(params[:id])
     @post.destroy
+
+    respond_to do |format|
+      format.json { render json: @post, status: :success }
+    end
   end
 
   #==================================================================
