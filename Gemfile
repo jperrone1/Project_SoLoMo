@@ -26,15 +26,16 @@ gem 'devise'
 gem 'json'
 
 
-group :development  do
-	gem 'pry'
-	gem 'pry-rails'	
-
-gem 'pry'
 
 gem 'typhoeus'
 
 gem 'geocoder'
+
+# Paperclip gem for uploading images (JP):
+gem 'paperclip'
+
+# Amazon web services gem required by Paperclip (JP):
+gem 'aws-sdk'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -43,6 +44,7 @@ end
 
 group :development, :test do
   gem 'pry'
+  gem 'pry-rails'
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'

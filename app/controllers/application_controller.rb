@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   # This method allows the new fields to be
   # added to the Devise User model. 
   def configure_permit
-    devise_parameter_sanitizer.for(:sign_up).push(:first_name, :last_name, :city, :state, :zip, :home_phone, :mobile_phone, :latitude, :longitude)
+    devise_parameter_sanitizer.for(:sign_up).push(:first_name, :last_name, :city, :state, :zip, :home_phone, :mobile_phone, :latitude, :longitude, :search_radius)
   end
 
 end
