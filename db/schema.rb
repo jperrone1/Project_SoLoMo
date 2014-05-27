@@ -12,7 +12,8 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 20140525052746) do
+ActiveRecord::Schema.define(version: 20140527200905) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,9 +30,36 @@ ActiveRecord::Schema.define(version: 20140525052746) do
   create_table "pins", force: true do |t|
     t.float    "latitude"
     t.float    "longitude"
+  end
+  create_table "events", force: true do |t|
+    t.text     "type"
+    t.integer  "user_id"
+    t.integer  "picture_id"
+    t.date     "date"
+    t.time     "time"
+    t.float    "duration"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "cash_only?"
+    t.text     "images"
+    t.text     "description"
+    t.float    "search_radius"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pictures", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "event_id"
+  end
+
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -64,6 +92,7 @@ ActiveRecord::Schema.define(version: 20140525052746) do
     t.string   "mobile_phone"
     t.float    "latitude"
     t.float    "longitude"
+    t.float    "search_radius"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

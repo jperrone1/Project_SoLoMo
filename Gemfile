@@ -34,13 +34,30 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'json'
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 
 
 
+<<<<<<< HEAD
+=======
+# Paperclip gem for uploading images (JP):
+gem 'paperclip'
 
+# Amazon web services gem required by Paperclip (JP):
+gem 'aws-sdk'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
+>>>>>>> master
 
 group :development, :test do
   gem 'pry'
+  gem 'pry-rails'
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
