@@ -30,7 +30,7 @@ class PinsController < ApplicationController
 
 	private
 	def pins_params
-		params.require(:pin).permit(:latitute, :longitude)
+		params.require(:pin).permit(:latitude, :longitude)
 	end
 
 	

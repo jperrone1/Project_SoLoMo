@@ -1,6 +1,4 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+
 
 $(document).ready(function(){
 	function initialize() {
@@ -8,12 +6,12 @@ $(document).ready(function(){
 			center: new google.maps.LatLng(37.0, 54.0),
 			zoom: 3
 		};
-	var map = new goggle.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 	console.log(map);
 
 	var pins = [];
 	$.get('/pins.json').done(function(data) {
-		pins = data
+		pins = data;
 		$.each(pins, function(index, item){
 			addPin(item.latitude, item.longitude, item.name);
 		});
@@ -53,7 +51,7 @@ $(document).ready(function(){
 				lastInfoWindow = newInfoWindow;
 			}
 		});
-	}
+	};
 	google.maps.event.addListener(map, 'click', function(event) {
 		var lat = event.latLng.lat();
 		var lng = event.latLng.lng();
@@ -69,7 +67,7 @@ $(document).ready(function(){
 				},
 				dataType: "json",
 				success: function(data) {
-					addPin(data.latitude, data.longitude, data.name)
+					addPin(data.latitude, data.longitude, data.name);
 				},
 				error: function(){
 					alert("Server is at lunch!");
