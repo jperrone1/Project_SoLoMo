@@ -1,15 +1,42 @@
 <h1>SoLoMo Posts</h1>
-<p>Posts:</p>
 
-<% @posts.each do |post| %>
-	<tr>
-  	<td><strong><%= post.title %></strong></td>
-  	<td><%= link_to 'Show', post %></td>
-  	<td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
-    <br>
-  </tr>
-<% end %>
+
+<!-- adds post via jquery, moves up to <td> with refresh -->
+<td><ul class="post_1"></ul></td> 
+<!-- <ul id = "post_show"> </ul> -->
+
 
 <br>
-<%= link_to 'New Post', new_post_path %>
+
+
+<div class="container">
+  <div class="row">
+     <div class="col-sm-6">
+      <form class="form-horizontal" id="new_post">  <!-- $('#new_post').on('submit....... -->
+        <div class="form-group">
+          <label for="post_title" class="col-sm-2 control-label">Post Title</label>
+          <div class="col-sm-10">
+            <input type="text" id="post_title" class="form-control" placeholder="Enter post">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="post_body" class="col-sm-2 control-label">Body</label>
+          <div class="col-sm-10">
+            <input type="text" id="post_body" class="form-control" placeholder="post body here">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-whole">ADD POST</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+

@@ -21,6 +21,7 @@ class PostsController < ApplicationController
   end
 
   def new
+    @posts = Post.all
     @post = Post.new
 
     respond_to do |format|
@@ -35,12 +36,14 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(post_params)
+    @post = Post.new(post_params)
+    # binding.pry
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to(@post, :notice => 'post was successfully created.') }
-        format.json { render :json => @post, :status => :created, :location => @post }
-        format.xml  { render :xml => @post, :status => :created, :location => @post }
+        format.json { render :json => @post, :status => :created } #:location => @post }
+        format.xml  { render :xml => @post, :status => :created }  #:location => @post }
       else
         format.html { render :action => "new" }
         format.json { render :json => @post.errors, :status => :unprocessable_entity }
@@ -67,6 +70,10 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
+
+    respond_to do |format|
+      format.json { render json: @post, status: :success }
+    end
   end
 
   #==================================================================
