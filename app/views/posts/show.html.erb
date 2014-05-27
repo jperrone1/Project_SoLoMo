@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Post</b>
+  <br>
+  <b><%= @post.title %>: 
+  <br>
+  </b><%= @post.body %>
+</p>
+
+
+<p>
+	<ul>
+		<%= render :partial => 'comments/comment', :collection => @post.comments %>
+	</ul>
+</p>
+
+<p>
+	<%= form_for [@post, Comment.new] do |f| %>
+	  <p>
+	    <%= f.label "New comment" %><br />
+	    <%= f.text_area :title %>
+	  </p>
+	  <p><%= f.submit "Submit" %></p>
+	<% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Index', posts_path %>
