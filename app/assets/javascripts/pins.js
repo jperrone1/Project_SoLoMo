@@ -1,29 +1,60 @@
-"use strict";
+// "use strict";
 
 $(document).ready(function(){
 
-  var map;
+  // var map;
   // var directionsDisplay;
   // var directionsService = new google.maps.DirectionsService();
   // var stepDisplay;
-  var markerArray = [];
+  // var markerArray = [];
   var geocoder;
   var infowindow = new google.maps.InfoWindow();
   var marker;
-  var pins = [];
+  var map;
+
+
+
 
 	//================================================================
-	function initialize() {
+	function initialize(currentPosition) {
+
+	var currCoords = { lat: currentPosition.coords.latitude, long: currentPosition.coords.longitude };
 
 	var mapOptions = {
-		center: new google.maps.LatLng(37.0, 54.0),  // TODO change to current location
-		zoom: 3
+		center: new google.maps.LatLng(currCoords.lat, currCoords.long),  // TODO change to current location
+		// center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+		zoom: 12
 	};
 
 	var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-	// console.log(map);
+	var geocoder = new google.maps.Geocoder();
+	var pins = [];
 
-	// retrieves DB location points, calls addPin
+	//geolocation function (browser/GPS sensor)
+
+
+
+
+  // function geoLocate() { 
+  //   if(navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(function(position) {
+  //       var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+  //       var currentAddress = null;
+
+  //       geocoder.geocode({'latLng': latlng}, function(results, status) {
+  //         if (status == google.maps.GeocoderStatus.OK) {
+  //           currentAddress = results[0].formatted_address;
+  //           document.getElementById('address').value = currentAddress;
+  //         } //inner if branch closure
+  //       }); //geocoder.geocode  
+  //     }); //getCurrentPosition function
+  //   } //top if branch closure
+  // } // geoLocate function closure
+
+
+
+	// grabs DB pins
 	$.get('/pins.json').done(function(data) {
 		pins = data;
 		$.each(pins, function(index, item){
@@ -31,34 +62,27 @@ $(document).ready(function(){
 		});
 	});
 
-	//adds pin based on addInfoWindowListener
 	var addPin = function(lat, long, name){
-		
 		var loc = new google.maps.LatLng(lat, long);
-
 		var newMarker = new google.maps.Marker({
 			position: loc,
 			map: map,
 			title: "BOOM!"
 		});
-
-		var newInfoWindow = new google.maps.InfoWindow({
-			content: "<h3>Added By: " + name + "</h3>"
-		});
+	var newInfoWindow = new google.maps.InfoWindow({
+		content: "<h3>Added By: " + name + "</h3>"
+	});
 		addInfoWindowListener(newMarker, newInfoWindow);
-	}; // addPin closure
-
+	};
 	var placeMaker = function(loc){
 		var newMarker = new google.maps.Marker({
 			position: loc,
 			map: map,
 			title: "BOOM2!"
 		});
-	}; //placeMaker closure
+	};
 
 	var lastInfoWindow;
-
-	//click event 
 	var addInfoWindowListener = function(marker, newInfoWindow){
 		google.maps.event.addListener(marker, 'click', function() {
 			if(!!lastInfoWindow){
@@ -72,9 +96,7 @@ $(document).ready(function(){
 				lastInfoWindow = newInfoWindow;
 			}
 		});
-	}; //addInfoWindowListener closure
-
-	//click event, posts point to DB
+	};
 	google.maps.event.addListener(map, 'click', function(event) {
 		var lat = event.latLng.lat();
 		var lng = event.latLng.lng();
@@ -87,18 +109,40 @@ $(document).ready(function(){
 					"latitude": lat,
 					"longitude": lng,
 					}
-				}, //data closure;
+				},
 				dataType: "json",
 				success: function(data) {
 					addPin(data.latitude, data.longitude, data.name);
-				}, //success closure
+				},
 				error: function(){
 					alert("Server is at lunch!");
-				} //error closure
-			}); //ajax post request closure
-		}); //addListener closure
-	
-	} //initialize function closure
+				}
+			});
+		});
+	};
 
-	google.maps.event.addDomListener(window, 'load', initialize);
-}); // DOCUMENT READY CLOSURE
+	var initializeWithDefault = function(){
+		var currentPosition = {coords: {latitude: "37.758900", longitude: "-122.490349"}}; 
+		initialize(currentPosition);
+	};
+
+	var geoLocate = function(){
+		if(!!navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(initialize, initializeWithDefault)
+		} else {
+			initializeWithDefault();
+		}
+	};
+	
+	if(location.pathname === "/pins/new") {
+		geoLocate();
+	}
+
+// 
+
+
+
+
+});
+
+
