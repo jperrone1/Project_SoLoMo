@@ -8,5 +8,5 @@
 
 
 posts = Post.create ([
-				{ title: "Antmachine", body: "Antmachine is Algonquin for 'destroyer of toilets'"}
+				{ title: "Antmachine", body: "is Algonquin for 'destroyer of toilets'"}
 				])
