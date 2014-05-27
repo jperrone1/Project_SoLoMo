@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  resources :pins
 
   resources :posts do
       resources :comments
   end
 
-  root 'posts#index'
+  root 'pins#new'
 
 end
