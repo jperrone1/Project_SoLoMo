@@ -12,8 +12,6 @@ $(document).ready(function(){
   var marker;
   var map;
 
-
-
 	//================================================================
 	function initialize(currentPosition) {
 
@@ -30,47 +28,16 @@ $(document).ready(function(){
 	var pins = [];
 
 
-	// $.ajax({
- //      // url: form.attr('action'),
- //      // method: form.attr('method'),
- //      url: "/events.json",
- //      method: "get",
- //      data: {
- //        "events": {
- //          "latitude": latitude,
- //          "longitude": longitude
- //        } //events
- //      }, //data
- //      dataType: "json",
- //      success: function(data) {
- //          console.log("events get");
-
- //        var span = $('.antmachine');
- //        var post =  "<li>"+data.latitude + ", " + data.longitude + "</li>" ;
- //        span.append(post);
- //        // $('post').val('');
- //      }, //success
- //      error: function(){
- //        alert("Server no love you long time");
- //      } //error
- //    }); // AJAX CLOSURE
-
-
-
-
-
-
-
-
-	// grabs DB pins
+	//=======================================================================
+	// grabs DB pins for all events
 	$.get('/events.json').done(function(data) {
 		pins = data;
 		$.each(pins, function(index, item){
-			addPin(item.latitude, item.longitude);
+			addPin(item.latitude, item.longitude, item.description);
 		}); //$.each closure
 	}); //$.get closure
 
-	var addPin = function(lat, long){
+	var addPin = function(lat, long, description){
 
 		var loc = new google.maps.LatLng(lat, long);
 
@@ -80,12 +47,24 @@ $(document).ready(function(){
 			title: "BOOM!"
 		}); // newMarker closure
 
+	// ================ PLEASE WORK ======================
+
+	  google.maps.event.addListener(newMarker, 'click', function() {
+		  var span = $('.antmachine');
+		  var dataWindow =  "<li>"+ description +'</li>';
+		  span.append(dataWindow);
+		}); //event listener marker
+
+
+
+	// ================ PLEASE WORK ======================
+
 	var newInfoWindow = new google.maps.InfoWindow({
 		content: "<h3>lat: " + lat + ", long: " + long + "</h3>"
 	}); //newInfoWindow closure
 
 		addInfoWindowListener(newMarker, newInfoWindow);
-	}; //invokes function defined below
+	}; //addPin closure
 
 	var placeMaker = function(loc){
 		var newMarker = new google.maps.Marker({
@@ -94,7 +73,9 @@ $(document).ready(function(){
 			title: "BOOM2!"
 		}); 
 	};  // placeMaker closure
-
+	//=======================================================================
+	
+	// shows one infowindow at a time
 	var lastInfoWindow;
 	var addInfoWindowListener = function(marker, newInfoWindow){
 		google.maps.event.addListener(marker, 'click', function() {
@@ -111,36 +92,33 @@ $(document).ready(function(){
 		});  //google maps event listener closure
 	}; //addInfoWindowListener closure
 
-	google.maps.event.addListener(map, 'click', function(event) {
+	google.maps.event.addListener(marker, 'click', function(event) {
 		var lat = event.latLng.lat();
 		var lng = event.latLng.lng();
 
-
-	// 	$.ajax({
-	// 		url: "/pins.json",
-	// 		method: "get",
-	// 		data: {
-	// 			"pin": {
-	// 				"latitude": lat,
-	// 				"longitude": lng,
-	//				"updated_at": updat
-	// 			} //pin closure
-	// 		}, //data closure
-	// 		dataType: "json",
-
-	// 		success: function(data) {
-	// 			addPin(data.latitude, data.longitude, data.name);
-	// 		}, //success
-
-	// 		error: function(){
-	// 			alert("Server is at lunch!");
-	// 		} //error
-
-	// 	}); //$.ajax closure
-
 	}); // google.maps.event Listener closure
 
-	};  // INITIALIZE CLOSURE  initialize(currentPosition) 
+	//=======================================================================
+
+	};  // INITIALIZE CLOSURE  initialize(currentPosition)    ===============
+
+	//   var marker = new google.maps.Marker({
+	//   	position: #
+	//   	map: map,
+	//   	title: "Boom"
+	//   });
+
+	//   google.maps.event.addListener(marker, 'click', function() {
+ //  	$.get('/events.json').done(function(data) {
+	// 		var description = data.description
+	// 	  var span = $('.antmachine');
+	// 	  var dataWindow =  "<li>"+ description +'</li>';
+	// 	  span.append(dataWindow);
+	//   }); //$.get closure
+
+	// }; //event listener marker
+
+	//=======================================================================
 
 	var initializeWithDefault = function(){
 		var currentPosition = {coords: {latitude: "37.7586", longitude: "-122.4902"}}; 
