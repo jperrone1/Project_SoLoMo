@@ -2,11 +2,6 @@
 
 $(document).ready(function(){
 
-  // var map;
-  // var directionsDisplay;
-  // var directionsService = new google.maps.DirectionsService();
-  // var stepDisplay;
-  // var markerArray = [];
   var geocoder;
   var infowindow = new google.maps.InfoWindow();
   var marker;
@@ -28,15 +23,16 @@ $(document).ready(function(){
 	var pins = [];
 
 	//=======================================================================
-	// grabs DB pins for all events
+	// grabs DB pins for all events.  Have to pass all EVENT parameters in addPin function
 	$.get('/events.json').done(function(data) {
 		pins = data;
 		$.each(pins, function(index, item){
-			addPin(item.latitude, item.longitude, item.description);
+			addPin(item.latitude, item.longitude, item.description, item.date, item.time, item.address, item.images, item.search_radius);
 		}); //$.each closure
 	}); //$.get closure
 
-	var addPin = function(lat, long, description){
+	// Have to pass all EVENT parameters in addPin function, later rendered in HTML
+	var addPin = function(lat, long, description, date, time, address, images, search_radius){
 
 		var loc = new google.maps.LatLng(lat, long);
 
@@ -46,19 +42,20 @@ $(document).ready(function(){
 			title: "BOOM!"
 		}); // newMarker closure
 
-	// ================ PLEASE WORK ======================
+	// ================================================================
 
+		// event listener: displays event information in html by map
 	  google.maps.event.addListener(newMarker, 'click', function() {
 		  var htmlChange = $('.antmachine');
-		  var dataWindow =  "<li>"+ description +'</li>';
+		  var dataWindow =  "<li> Address: " + address + "</li> <br>" + "<li> Description: " + description + "</li> <br>" + "<li> Date: " + date + "</li> <br>" + "<li> Time: " + time + "</li> <br>";
 		  // $(htmlChange).reset();
 		  htmlChange.html(dataWindow);
 		}); //event listener marker
 
-	// ================ PLEASE WORK ======================
+	// ================================================================
 
 	var newInfoWindow = new google.maps.InfoWindow({
-		content: "<h3>lat: " + lat + ", long: " + long + "</h3>"
+		content: "<h3>Address: " + address + "</h3>"
 	}); //newInfoWindow closure
 
 		addInfoWindowListener(newMarker, newInfoWindow);
