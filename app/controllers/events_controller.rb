@@ -21,16 +21,17 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to(@event, :notice => 'event was successfully created.') }
+        format.html { redirect_to "/", :notice => 'event was successfully created.' }
         format.json { render :json => @event, :status => :created } 
         format.xml  { render :xml => @event, :status => :created }  
+        # redirect_to events_path
       else
         format.html { render :action => "new" }
         format.json { render :json => @event.errors, :status => :unprocessable_entity }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end
+    # redirect_to events_path
     end
-    # redirect_to(event)
   end
 
   def show
