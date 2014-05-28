@@ -14,7 +14,6 @@ $(document).ready(function(){
 
 
 
-
 	//================================================================
 	function initialize(currentPosition) {
 
@@ -59,28 +58,33 @@ $(document).ready(function(){
 		pins = data;
 		$.each(pins, function(index, item){
 			addPin(item.latitude, item.longitude, item.name);
-		});
-	});
+		}); //$.each closure
+	}); //$.get closure
 
 	var addPin = function(lat, long, name){
+
 		var loc = new google.maps.LatLng(lat, long);
+
 		var newMarker = new google.maps.Marker({
 			position: loc,
 			map: map,
 			title: "BOOM!"
-		});
+		}); // newMarker closure
+
 	var newInfoWindow = new google.maps.InfoWindow({
 		content: "<h3>Added By: " + name + "</h3>"
-	});
+	}); //newInfoWindow closure
+
 		addInfoWindowListener(newMarker, newInfoWindow);
-	};
+	}; //invokes function defined below
+
 	var placeMaker = function(loc){
 		var newMarker = new google.maps.Marker({
 			position: loc,
 			map: map,
 			title: "BOOM2!"
-		});
-	};
+		}); 
+	};  // placeMaker closure
 
 	var lastInfoWindow;
 	var addInfoWindowListener = function(marker, newInfoWindow){
@@ -95,36 +99,42 @@ $(document).ready(function(){
 				newInfoWindow.open(map,this);
 				lastInfoWindow = newInfoWindow;
 			}
-		});
-	};
+		});  //google maps event listener closure
+	}; //addInfoWindowListener closure
+
 	google.maps.event.addListener(map, 'click', function(event) {
 		var lat = event.latLng.lat();
 		var lng = event.latLng.lng();
 	
 		$.ajax({
+
 			url: "/pins",
 			method: "post",
 			data: {
 				"pin": {
 					"latitude": lat,
 					"longitude": lng,
-					}
-				},
-				dataType: "json",
-				success: function(data) {
-					addPin(data.latitude, data.longitude, data.name);
-				},
-				error: function(){
-					alert("Server is at lunch!");
-				}
-			});
-		});
-	};
+				} //pin closure
+			}, //data closure
+			dataType: "json",
+
+			success: function(data) {
+				addPin(data.latitude, data.longitude, data.name);
+			}, //success
+
+			error: function(){
+				alert("Server is at lunch!");
+			} //error
+
+		}); //$.ajax closure
+	}); // google.maps.event Listener closure
+
+	};  // INITIALIZE CLOSURE  initialize(currentPosition) 
 
 	var initializeWithDefault = function(){
-		var currentPosition = {coords: {latitude: "37.758900", longitude: "-122.490349"}}; 
+		var currentPosition = {coords: {latitude: "37.7586", longitude: "-122.4902"}}; 
 		initialize(currentPosition);
-	};
+	}; //initializeWithDefault closure
 
 	var geoLocate = function(){
 		if(!!navigator.geolocation){
@@ -132,17 +142,16 @@ $(document).ready(function(){
 		} else {
 			initializeWithDefault();
 		}
-	};
+	}; //geoLocate closure
 	
 	if(location.pathname === "/pins/new") {
 		geoLocate();
-	}
+	} // if pathname closure
 
 // 
 
 
 
-
-});
+}); //DOCUMENT READY CLOSURE
 
 
