@@ -27,7 +27,11 @@ $(document).ready(function(){
 	$.get('/events.json').done(function(data) {
 		pins = data;
 		$.each(pins, function(index, item){
+			//if DISTANCE >= SEARCH_RADIUS 
 			addPin(item.latitude, item.longitude, item.description, item.date, item.time, item.address, item.images, item.search_radius);
+			//else 
+			//SOMETHING ELSE
+			//END
 		}); //$.each closure
 	}); //$.get closure
 
