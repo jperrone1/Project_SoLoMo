@@ -11,6 +11,6 @@ class Picture < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   # Create ActiveRecord methods to facilitate data retrieval:
-  belongs_to :user
+  belongs_to :event
 
 end

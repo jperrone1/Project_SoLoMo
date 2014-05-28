@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527200905) do
+ActiveRecord::Schema.define(version: 20140528001129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 20140527200905) do
   create_table "events", force: true do |t|
     t.text     "type"
     t.integer  "user_id"
-    t.integer  "picture_id"
     t.date     "date"
     t.time     "time"
     t.float    "duration"
@@ -36,9 +35,7 @@ ActiveRecord::Schema.define(version: 20140527200905) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "cash_only?"
-    t.text     "images"
     t.text     "description"
-    t.float    "search_radius"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140527200905) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "event_id"
+    t.string   "caption"
   end
 
   create_table "pins", force: true do |t|

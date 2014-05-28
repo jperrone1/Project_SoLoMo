@@ -4,6 +4,4 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Create ActiveRecord methods to facilitate data retrieval:
-  has_many :pictures
 end
